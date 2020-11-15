@@ -18,6 +18,7 @@ const PokeDetails: React.FC<PokeDetailProps> = ({ match }) => {
     root,
     pokemon,
     details,
+    link,
     accordionSection,
     heading,
   } = useDetailStyle();
@@ -114,14 +115,14 @@ const PokeDetails: React.FC<PokeDetailProps> = ({ match }) => {
                   {evolutionData &&
                     evolutionData?.map((evolution, index) => (
                       <li key={`${evolution}-${index}`}>
-                        <Link to={`/pokemon/${evolution.name}`}>
-                        <Typography variant="h4" component="h4" align="center" gutterBottom>
+                        <a href={`/pokemon/${evolution.name}`} className={link}>
+                        <Typography variant="h6" component="h6" align="center" gutterBottom>
                         {evolution.name}
                         </Typography>
                           <img
                             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution.id}.png`}
                           ></img>
-                        </Link>
+                        </a>
                       </li>
                     ))}
                 </ul>

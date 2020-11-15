@@ -17,6 +17,11 @@ createStyles({
     width: '100%',
     
   },
+
+  link:{
+      textDecoration: 'none',
+      color: '#569AB0'
+  },
   
   details: {
     width: '100%',

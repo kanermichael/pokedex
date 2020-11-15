@@ -1,15 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-interface IPokemons {
-    count: number,
-    results: [
-        {
-        name: string, 
-        url: string
-        }
-    ]
-}
+import { IPokemons } from '../Types/FetchTypes';
 
 const useFetch = () => {
 
