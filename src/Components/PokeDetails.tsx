@@ -2,16 +2,15 @@ import React from "react";
 import { RouteComponentProps } from "react-router";
 import axios from "axios";
 import useEvolution from "../Hooks/useEvolution";
-import { Link } from "react-router-dom";
 import useDetailStyle from "../Styles/DetailStyle";
 import { useLibrary } from "../Styles/BaseStyle";
-import { IPokeDetailsTypes } from '../Types/DetailTypes';
+import { IPokeDetailsTypes } from "../Types/DetailTypes";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 type PokeDetailParams = {
   name: string;
 };
 type PokeDetailProps = RouteComponentProps<PokeDetailParams>;
-
 
 const PokeDetails: React.FC<PokeDetailProps> = ({ match }) => {
   const {
@@ -73,14 +72,28 @@ const PokeDetails: React.FC<PokeDetailProps> = ({ match }) => {
     <React.Fragment>
       <Container maxWidth="md">
         <div className={root}>
-          <Typography variant="h3" component="h2" align="center" gutterBottom>
-            {name}
-          </Typography>
+          {name ? (
+            <Typography variant="h3" component="h2" align="center" gutterBottom>
+              {name}
+            </Typography>
+          ) : (
+            <Skeleton variant="rect" width={200} height={20} animation="wave" />
+          )}
+
           <Typography variant="h4" component="h3" align="center" gutterBottom>
             #{order}
           </Typography>
-          <img src={sprites?.front_default} alt={name} className={pokemon} />
-         
+          {sprites ? (
+            <img src={sprites?.front_default} alt={name} className={pokemon} />
+          ) : (
+            <Skeleton
+              variant="rect"
+              width={210}
+              height={118}
+              animation="wave"
+            />
+          )}
+
           <section className={accordionSection}>
             <Accordion>
               <AccordionSummary
@@ -116,9 +129,14 @@ const PokeDetails: React.FC<PokeDetailProps> = ({ match }) => {
                     evolutionData?.map((evolution, index) => (
                       <li key={`${evolution}-${index}`}>
                         <a href={`/pokemon/${evolution.name}`} className={link}>
-                        <Typography variant="h6" component="h6" align="center" gutterBottom>
-                        {evolution.name}
-                        </Typography>
+                          <Typography
+                            variant="h6"
+                            component="h6"
+                            align="center"
+                            gutterBottom
+                          >
+                            {evolution.name}
+                          </Typography>
                           <img
                             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution.id}.png`}
                           ></img>

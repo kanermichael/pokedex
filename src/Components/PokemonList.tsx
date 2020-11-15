@@ -29,12 +29,15 @@ const PokemonList: React.FC = () => {
   return (
     <React.Fragment>
       <Container className={cardGrid} maxWidth="md">
-        {loading && <h1>Loading</h1>}
-        <Grid container spacing={4}>
-          {data.results?.map(({ name, url }, index) => (
-            <PokemonCard key={`${name}-${index}`} name={name} url={url} />
-          ))}
-        </Grid>
+        {loading ? (
+          <h1>Loading</h1>
+        ) : (
+          <Grid container spacing={4}>
+            {data.results?.map(({ name, url }, index) => (
+              <PokemonCard key={`${name}-${index}`} name={name} url={url} />
+            ))}
+          </Grid>
+        )}
       </Container>
       <div className={root}>
         <ButtonGroup color="primary" aria-label="outlined primary button group">
