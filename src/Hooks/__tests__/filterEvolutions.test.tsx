@@ -1,7 +1,7 @@
 import fakeData from '../../TestingData/evolutiondata.json';
 import filterEvolutions from '../../Utils/FilterEvolution'
 
-test('finds data in tree structure and returns array with results', () => {
+it('finds data in tree structure and returns array with results', () => {
     const fakeresultData = [
         {
           name: 'venusaur',

@@ -1,5 +1,4 @@
 import React from "react";
-import { RouteComponentProps } from "react-router";
 import axios from "axios";
 import useEvolution from "../Hooks/useEvolution";
 import useDetailStyle from "../Styles/DetailStyle";
@@ -17,11 +16,10 @@ import { IPokeDetailsTypes } from "../Types/DetailTypes";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 type PokeDetailParams = {
-  name: string;
+  pokename: string;
 };
-type PokeDetailProps = RouteComponentProps<PokeDetailParams>;
 
-const PokeDetails: React.FC<PokeDetailProps> = ({ match }) => {
+const PokeDetails: React.FC<PokeDetailParams> = ({ pokename }) => {
   const {
     root,
     pokemon,
@@ -36,33 +34,33 @@ const PokeDetails: React.FC<PokeDetailProps> = ({ match }) => {
   >();
   const [EvolutionUrl, setEvolutionUrl] = React.useState("");
   const evolutionData = useEvolution(EvolutionUrl);
+  const mountedRef = React.useRef(false) 
 
   React.useEffect(() => {
-    let ignore = false;
+    
+    mountedRef.current = true
     const getPokemonDetails = async () => {
       try {
         const getDetails = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon/${match.params.name}/`
+          `https://pokeapi.co/api/v2/pokemon/${pokename}/`
         );
         const getEvolutionChain = await axios.get(
           `https://pokeapi.co/api/v2/pokemon-species/${getDetails.data.name}/`
         );
-
-        setEvolutionUrl(getEvolutionChain.data.evolution_chain.url);
-
-        if (!ignore) {
+        if (mountedRef.current) {
+          setEvolutionUrl(getEvolutionChain.data.evolution_chain.url);
           setPokeDetailsState(getDetails);
         }
       } catch (err) {
-        throw Error("fetching data not succeded");
+        throw Error(`fetching data ${err}`);
       }
     };
     getPokemonDetails();
 
     return () => {
-      ignore = true;
+      mountedRef.current = false
     };
-  }, [match]);
+  }, [pokename]);
 
   const { name, order, sprites, abilities, types, stats, moves } =
     pokeDetailsState?.data || {};
@@ -138,6 +136,7 @@ const PokeDetails: React.FC<PokeDetailProps> = ({ match }) => {
                           </Typography>
                           <img
                             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution.id}.png`}
+                            alt={evolution.name}
                           ></img>
                         </a>
                       </li>

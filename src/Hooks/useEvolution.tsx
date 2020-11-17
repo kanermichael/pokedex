@@ -11,7 +11,7 @@ const useEvolution = (url: string) => {
   React.useEffect(() => {
     async function getData() {
       const evolutionsRequest = await axios.get(url);
-      console.log(evolutionsRequest)
+
       const filteredEvolution = filterEvolutions("species", evolutionsRequest);
 
       for (const pokemon of filteredEvolution) {

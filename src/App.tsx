@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import PokemonList from "./Components/PokemonList";
 import PokeDetails from "./Components/PokeDetails";
@@ -9,7 +9,7 @@ function App() {
   return (
     <React.Fragment>
       <Header />
-
+      <BrowserRouter>
       <Switch>
         <Route exact path="/">
           <React.Fragment>
@@ -20,9 +20,13 @@ function App() {
         <Route
           exact
           path="/:name"
-          render={(props) => <PokeDetails {...props} />}
+          render={(props) => {
+         
+          return <PokeDetails pokename={props.match.params.name} />
+        }}
         />
       </Switch>
+     </BrowserRouter>
     </React.Fragment>
   );
 }
