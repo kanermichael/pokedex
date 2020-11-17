@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import useCardStyle from "../Styles/CardStyle";
-import { useLibrary } from "../Styles/BaseStyle";
+import { Grid, Card, CardMedia, CardContent, Typography, Button, CardActions}  from "../Styles/BaseStyle";
+
 
 interface Props {
   name: string;
@@ -11,7 +12,6 @@ interface Props {
 const PokemonCard: React.FC<Props> = ({ name, url }) => {
 
   const { cardMedia, card, cardContent } = useCardStyle();
-  const { Grid, Card, CardMedia, CardContent, Typography, Button, CardActions} = useLibrary();
 
   const regex: RegExp = /\/\d+(?=\/)/;
   const pokeID = url.match(regex) ?? ""[0].replace("/", "");
@@ -23,17 +23,17 @@ const PokemonCard: React.FC<Props> = ({ name, url }) => {
           <CardMedia
             className={cardMedia}
             image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon${pokeID}.png`}
-            title="Image title"
+            title={name}
           />
           <CardContent className={cardContent}>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography gutterBottom variant="h5" component="h2" aria-label="pokemon-name">
               {name}
             </Typography>
           </CardContent>
           <CardActions>
-            <Link to={`/pokemon/${name}`}>
-              <Button size="small" color="primary">
-                View details
+            <Link to={`/${name}`}>
+              <Button size="small" color="primary" aria-label="pokemon">
+                View Details
               </Button>
             </Link>
           </CardActions>

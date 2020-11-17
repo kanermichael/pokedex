@@ -8,25 +8,31 @@ const useFetch = () => {
     const loadNumber: number = 6
     const [loading, setLoading] = React.useState(false)
     const [data, setData] = React.useState<IPokemons>(Object)
+
+    const mountedRef = React.useRef(false) 
     
     React.useEffect(() => {
+        mountedRef.current = true
+
         const getPokemons = async() => {
             try {
                 setLoading(true)
                 const getData = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${loadNumber}&offset=${offset}`)
                 const {count, results} = getData.data
+                if (mountedRef.current) {
                 setData({count, results})
+                setLoading(false)
+                }
             }catch(err){
                 throw Error(`API Call was not successful ${err}`)
-            }
-            finally{
-                setLoading(false)
             }
         } 
         getPokemons()
 
+        return () => {
+              mountedRef.current = false
+        };
     }, [offset])
-
    return {offset, setOffset, data, loadNumber, loading}
 }
 

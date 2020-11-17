@@ -3,7 +3,16 @@ import { RouteComponentProps } from "react-router";
 import axios from "axios";
 import useEvolution from "../Hooks/useEvolution";
 import useDetailStyle from "../Styles/DetailStyle";
-import { useLibrary } from "../Styles/BaseStyle";
+import {
+  Container,
+  Chip,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+  ExpandMoreIcon,
+  Avatar,
+} from "../Styles/BaseStyle";
 import { IPokeDetailsTypes } from "../Types/DetailTypes";
 import Skeleton from "@material-ui/lab/Skeleton";
 
@@ -21,16 +30,6 @@ const PokeDetails: React.FC<PokeDetailProps> = ({ match }) => {
     accordionSection,
     heading,
   } = useDetailStyle();
-  const {
-    Container,
-    Chip,
-    Accordion,
-    AccordionSummary,
-    AccordionDetails,
-    Typography,
-    ExpandMoreIcon,
-    Avatar,
-  } = useLibrary();
 
   const [pokeDetailsState, setPokeDetailsState] = React.useState<
     IPokeDetailsTypes
@@ -63,7 +62,7 @@ const PokeDetails: React.FC<PokeDetailProps> = ({ match }) => {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [match]);
 
   const { name, order, sprites, abilities, types, stats, moves } =
     pokeDetailsState?.data || {};
@@ -106,7 +105,7 @@ const PokeDetails: React.FC<PokeDetailProps> = ({ match }) => {
               <AccordionDetails>
                 <ul className={details}>
                   {moves?.map(({ move }, index) => (
-                    <li key={`${index}`}>
+                    <li key={`${move}-${index}`}>
                       <Chip avatar={<Avatar>M</Avatar>} label={move.name} />
                     </li>
                   ))}
@@ -153,7 +152,7 @@ const PokeDetails: React.FC<PokeDetailProps> = ({ match }) => {
             </Typography>
             <ul className={details}>
               {abilities?.map((details, index) => (
-                <li key={`${index}`}>
+                <li key={`${details}-${index}`}>
                   <Chip label={details.ability.name} />
                 </li>
               ))}
@@ -165,7 +164,7 @@ const PokeDetails: React.FC<PokeDetailProps> = ({ match }) => {
             </Typography>
             <ul className={details}>
               {types?.map((type, index) => (
-                <li key={`${index}`}>
+                <li key={`${type}-${index}`}>
                   <Chip label={type.type.name} />
                 </li>
               ))}
@@ -177,7 +176,7 @@ const PokeDetails: React.FC<PokeDetailProps> = ({ match }) => {
             </Typography>
             <ul className={details}>
               {stats?.map(({ base_stat, stat }, index) => (
-                <li key={`${index}`}>
+                <li key={`${base_stat}-${index}`}>
                   <Chip label={`${stat.name}:${base_stat}`} />
                 </li>
               ))}

@@ -25,9 +25,6 @@ const useBaseStyle = makeStyles((theme) =>
 
 );
 
+export {Card,Grid, CardActions, CardContent, CardMedia,Container, Chip, Accordion, AccordionSummary, AccordionDetails, Typography, ExpandMoreIcon, Avatar, Button, ButtonGroup}
 
-const useLibrary = () => {
- return {Card, Grid, CardActions, CardContent, CardMedia,Container, Chip, Accordion, AccordionSummary, AccordionDetails, Typography, ExpandMoreIcon, Avatar, Button, ButtonGroup}
-}
-
-export {useBaseStyle, useLibrary};
+export { useBaseStyle };
