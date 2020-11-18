@@ -124,7 +124,7 @@ const PokeDetails: React.FC<PokeDetailParams> = ({ pokename }) => {
                   {evolutionData &&
                     evolutionData?.map((evolution, index) => (
                       <li key={`${evolution}-${index}`}>
-                        <a href={`/pokemon/${evolution.name}`} className={link}>
+                        <a href={`/${evolution.name}`} className={link}>
                           <Typography
                             variant="h6"
                             component="h6"
