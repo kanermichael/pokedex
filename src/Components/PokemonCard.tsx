@@ -17,7 +17,7 @@ interface Props {
 }
 
 const PokemonCard: React.FC<Props> = ({ name, url }) => {
-  const { cardMedia, card, cardContent } = useCardStyle();
+  const { card, cardContent } = useCardStyle();
 
   const regex: RegExp = /\/\d+(?=\/)/;
   const pokeID = url.match(regex) ?? ""[0].replace("/", "");
@@ -27,7 +27,7 @@ const PokemonCard: React.FC<Props> = ({ name, url }) => {
       <Grid item xs={12} sm={6} md={4}>
         <Card className={card}>
           <CardMedia
-            className={cardMedia}
+            component="img"
             image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon${pokeID}.png`}
             title={name}
           />
