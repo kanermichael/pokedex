@@ -1,8 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import useCardStyle from "../Styles/CardStyle";
-import { Grid, Card, CardMedia, CardContent, Typography, Button, CardActions}  from "../Styles/BaseStyle";
-
+import {
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Button,
+  CardActions,
+} from "../Styles/BaseStyle";
 
 interface Props {
   name: string;
@@ -10,7 +17,6 @@ interface Props {
 }
 
 const PokemonCard: React.FC<Props> = ({ name, url }) => {
-
   const { cardMedia, card, cardContent } = useCardStyle();
 
   const regex: RegExp = /\/\d+(?=\/)/;
@@ -26,7 +32,12 @@ const PokemonCard: React.FC<Props> = ({ name, url }) => {
             title={name}
           />
           <CardContent className={cardContent}>
-            <Typography gutterBottom variant="h5" component="h2" aria-label="pokemon-name">
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h2"
+              aria-label="pokemon-name"
+            >
               {name}
             </Typography>
           </CardContent>

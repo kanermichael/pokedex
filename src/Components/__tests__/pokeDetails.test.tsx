@@ -14,9 +14,6 @@ it("loads pokemon detail page", async () => {
           <PokeDetails pokename='caterpie' />
         </MemoryRouter>
       );
-      
+      // expect this ability to be in the document
       expect(await screen.findByText(/shield-dust/i)).toBeInTheDocument()
-
-      const paginationButton = screen.queryByText(/next/i)
-      expect(paginationButton).not.toBeInTheDocument() 
 })

@@ -10,10 +10,14 @@ afterAll(() => server.close());
 afterEach(() => server.resetHandlers());
 
 describe("Pokemon Overview Page ", () => {
+
+  
   it("Loads Header correctly", () => {
     render(<Header />);
+    // check if header loads with correct text
     expect(screen.getByText("Pokedex"));
   });
+
   it("loads pokemonlist", async () => {
     render(
       <MemoryRouter>

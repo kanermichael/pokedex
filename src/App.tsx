@@ -10,23 +10,22 @@ function App() {
     <React.Fragment>
       <Header />
       <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          <React.Fragment>
-            <PokemonList />
-          </React.Fragment>
-        </Route>
+        <Switch>
+          <Route exact path="/">
+            <React.Fragment>
+              <PokemonList />
+            </React.Fragment>
+          </Route>
 
-        <Route
-          exact
-          path="/:name"
-          render={(props) => {
-         
-          return <PokeDetails pokename={props.match.params.name} />
-        }}
-        />
-      </Switch>
-     </BrowserRouter>
+          <Route
+            exact
+            path="/:name"
+            render={(props) => {
+              return <PokeDetails pokename={props.match.params.name} />;
+            }}
+          />
+        </Switch>
+      </BrowserRouter>
     </React.Fragment>
   );
 }

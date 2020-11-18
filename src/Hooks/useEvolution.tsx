@@ -13,8 +13,9 @@ const useEvolution = (url: string) => {
       const evolutionsRequest = await axios.get(url);
 
       const filteredEvolution = filterEvolutions("species", evolutionsRequest);
+      const reverseFilteredEvolution = filteredEvolution.reverse();
 
-      for (const pokemon of filteredEvolution) {
+      for (const pokemon of reverseFilteredEvolution) {
         const getEvolutionPokemon = await axios.get(
           `https://pokeapi.co/api/v2/pokemon/${pokemon.name}/`
         );

@@ -17,6 +17,6 @@ it('finds data in tree structure and returns array with results', () => {
         }
       ]
     const testResult = filterEvolutions("species", fakeData)
-
+    // check that the function returns correct format of data
     expect(testResult).toStrictEqual(fakeresultData)
 })

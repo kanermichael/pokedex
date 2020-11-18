@@ -34,11 +34,10 @@ const PokeDetails: React.FC<PokeDetailParams> = ({ pokename }) => {
   >();
   const [EvolutionUrl, setEvolutionUrl] = React.useState("");
   const evolutionData = useEvolution(EvolutionUrl);
-  const mountedRef = React.useRef(false) 
+  const mountedRef = React.useRef(false);
 
   React.useEffect(() => {
-    
-    mountedRef.current = true
+    mountedRef.current = true;
     const getPokemonDetails = async () => {
       try {
         const getDetails = await axios.get(
@@ -58,7 +57,7 @@ const PokeDetails: React.FC<PokeDetailParams> = ({ pokename }) => {
     getPokemonDetails();
 
     return () => {
-      mountedRef.current = false
+      mountedRef.current = false;
     };
   }, [pokename]);
 
@@ -98,7 +97,7 @@ const PokeDetails: React.FC<PokeDetailParams> = ({ pokename }) => {
                 aria-controls="panel1a-content"
                 id="sheader"
               >
-                <Typography className={heading}>{name}`s moves</Typography>
+                <Typography className={heading}>{ name ? `${name}'s moves` :  <Skeleton variant="rect" width={200} height={20} animation="wave" />}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <ul className={details}>
@@ -118,7 +117,7 @@ const PokeDetails: React.FC<PokeDetailParams> = ({ pokename }) => {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography className={heading}>{name}`s evolutions</Typography>
+                <Typography className={heading}>{name ? `${name}'s evolutions` :  <Skeleton variant="rect" width={200} height={20} animation="wave" /> }</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <ul className={details}>

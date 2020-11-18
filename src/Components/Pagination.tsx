@@ -3,14 +3,18 @@ import { Button, ButtonGroup } from "../Styles/BaseStyle";
 import useListStyle from "../Styles/ListStyle";
 
 type Props = {
-    offset: number,
-    loadNumber: number,
-    count: number,
-    setOffset: (offset:number) => void
-}
+  offset: number;
+  loadNumber: number;
+  count: number;
+  setOffset: (offset: number) => void;
+};
 
-const Pagination: React.FC<Props> = ({offset, loadNumber, count, setOffset}) => {
-
+const Pagination: React.FC<Props> = ({
+  offset,
+  loadNumber,
+  count,
+  setOffset,
+}) => {
   const { root } = useListStyle();
 
   const handleNextPage = (e: React.SyntheticEvent) => {
@@ -27,7 +31,6 @@ const Pagination: React.FC<Props> = ({offset, loadNumber, count, setOffset}) => 
       setOffset(offset - loadNumber);
     }
   };
-
 
   return (
     <div className={root}>
@@ -50,6 +53,5 @@ const Pagination: React.FC<Props> = ({offset, loadNumber, count, setOffset}) => 
     </div>
   );
 };
-
 
 export default Pagination;
